@@ -33,9 +33,9 @@ public class DiaDia {
 	private Partita partita;
 	private IOConsole io;
 
-	public DiaDia() {
+	public DiaDia(IOConsole io) {
 		this.partita = new Partita();
-		this.io = new IOConsole();
+		this.io = io;
 	}
 
 	public void gioca() {
@@ -91,9 +91,9 @@ public class DiaDia {
 		for(int i=0; i< elencoComandi.length; i++) 
 			io.mostraMessaggio(elencoComandi[i]+" ");
 	}
-	
+
 	private void vediBorsa() {
-		 io.mostraMessaggio(this.partita.getGiocatore().getBorsa().toString());;
+		io.mostraMessaggio(this.partita.getGiocatore().getBorsa().toString());;
 	}
 
 	/**
@@ -123,6 +123,11 @@ public class DiaDia {
 	private void fine() {
 		io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
 	}
+	/**
+	 *	Cerca di prendere un oggetto. Se c'e' un oggetto nella stanza 
+	 *  corrente lo aggiunge alla borsa del giocatore e lo rimuove 
+	 *  dalla stanza corrente, altrimenti stampa un messaggio di errore
+	 */	
 	public void prendi(String nomeAttrezzo) {
 		if(nomeAttrezzo==null) {
 			io.mostraMessaggio("Inserire attrezzo che si vuole prendere. Esempio:prendi lanterna");
@@ -139,7 +144,11 @@ public class DiaDia {
 			}
 		}
 	}
-
+	/**
+	 *	Cerca di posare un oggetto. Se c'e' un oggetto nella borsa 
+	 *  lo aggiunge alla stanza corrente e lo rimuove dalla borsa, 
+	 *  altrimenti stampa un messaggio di errore
+	 */	
 
 	public void posa(String nomeAttrezzo) {
 		if(nomeAttrezzo==null) {
@@ -159,7 +168,8 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia();
+		IOConsole io = new IOConsole();
+		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 	}
 }

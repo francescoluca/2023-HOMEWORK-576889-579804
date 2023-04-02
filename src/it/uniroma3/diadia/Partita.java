@@ -17,7 +17,6 @@ public class Partita {
 	private Stanza stanzaCorrente;
 	private Giocatore giocatore;
 	private boolean finita;
-	private int cfu;
 	
 	public Partita(){
 		labirinto = new Labirinto();
@@ -25,7 +24,6 @@ public class Partita {
 		labirinto.creaLabirinto();
 		stanzaCorrente = labirinto.getStanzaIniziale();
 		this.finita = false;
-		this.cfu = giocatore.getCfu();
 	}
 
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
@@ -40,7 +38,6 @@ public class Partita {
 		return this.giocatore;
 	}
 	
-	
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta
@@ -54,7 +51,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return finita || vinta() || (cfu == 0);
+		return finita || vinta() || (giocatore.getCfu() == 0);
 	}
 
 	/**

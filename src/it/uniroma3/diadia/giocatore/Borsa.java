@@ -29,15 +29,19 @@ public class Borsa {
 	}
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
-		for (int i= 0; i<this.numeroAttrezzi; i++)
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				a = attrezzi[i];
+		for (int i= 0; i<this.numeroAttrezzi; i++) {
+			if(this.attrezzi[i]!=null)
+				if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+					a = attrezzi[i];
+		}		
 		return a;
 	}
 	public int getPeso() {
 		int peso = 0;
-		for (int i= 0; i<this.numeroAttrezzi; i++)
-			peso += this.attrezzi[i].getPeso();
+		for (int i= 0; i<this.numeroAttrezzi; i++) {
+			if(this.attrezzi[i]!=null)
+				peso += this.attrezzi[i].getPeso();
+		}
 		return peso;
 	}
 	public boolean isEmpty() {
@@ -61,8 +65,10 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			for (int i= 0; i<this.numeroAttrezzi; i++)
-				s.append(attrezzi[i].toString()+" ");
+			for (int i= 0; i<this.numeroAttrezzi; i++) {
+				if(this.attrezzi[i]!=null)
+					s.append(attrezzi[i].toString()+" ");
+			}
 		}
 		else
 			s.append("Borsa vuota");
