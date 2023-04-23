@@ -9,7 +9,7 @@ public class StanzaBloccata extends Stanza{
 		this.AttrezzoChiave = AttrezzoChiave;
 		this.direzioneBloccata = direzioneBloccata;
 	}
-	
+
 	@Override
 	public Stanza getStanzaAdiacente(String direzione) {
 		if(direzione == direzioneBloccata) {

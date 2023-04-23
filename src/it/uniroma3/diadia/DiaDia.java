@@ -1,8 +1,8 @@
 package it.uniroma3.diadia;
 
 
-import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -29,11 +29,11 @@ public class DiaDia {
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
 	private Partita partita;
-	private IOConsole io;
+	private IO io;
 
 	public DiaDia(IO io) {
 		this.partita = new Partita();
-		this.io = (IOConsole) io;
+		this.io = io;
 	}
 
 	public void gioca() {
