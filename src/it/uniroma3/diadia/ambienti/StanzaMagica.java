@@ -36,4 +36,9 @@ public class StanzaMagica extends Stanza{
 		super.addAttrezzo(attrezzo);
 		return false;
 	}
+
+	public boolean isMagica() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

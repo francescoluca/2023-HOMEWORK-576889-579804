@@ -9,7 +9,6 @@ public class ComandoGuarda implements Comando {
 	public void esegui(Partita partita) {
 		System.out.println(partita.getStanzaCorrente());
 		System.out.println(partita.getGiocatore().getBorsa());
-
 	}
 
 	@Override

@@ -29,12 +29,10 @@ public class ComandoVai implements Comando {
 	}
 	@Override
 	public String getNome() {
-		// TODO Auto-generated method stub
 		return "vai";
 	}
 	@Override
 	public String getParametro() {
-		// TODO Auto-generated method stub
 		return this.direzione;
 	}
 }

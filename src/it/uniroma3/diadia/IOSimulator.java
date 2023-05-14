@@ -1,24 +1,55 @@
 package it.uniroma3.diadia;
 
-public class IOSimulator implements IO{
+import java.util.ArrayList;
+import java.util.List;
 
-//	public String comandiLetti();
-//	private int indiceProxComando;
-//
-//	public IOSimulator(String ... comandiLetti) {
-//		this.comandiLetti = comandiLetti;
-//		this.indiceProxComando
-//	}
-	@Override
-	public void mostraMessaggio(String messaggio) {
-		// TODO Auto-generated method stub
+public class IOSimulator implements IO {
 
+	private List<String> righeLette;
+	private int indiceRigheLette;
+	private List<String> messaggiProdotti;
+	private int indiceMessaggiProdotti;
+	private int indiceMessaggiMostrati;
+
+	public IOSimulator(List<String> righeDaLeggere) {
+		this.righeLette = righeDaLeggere;
+		this.indiceRigheLette = 0;
+		this.indiceMessaggiMostrati = 0;
+		this.messaggiProdotti = new ArrayList<>();
+	}
+	
+	public List<String> getMessaggiProdotti() {
+		return messaggiProdotti;
+	}
+	public void setMessaggiProdotti(List<String> messaggiProdotti) {
+		this.messaggiProdotti = messaggiProdotti;
 	}
 
 	@Override
 	public String leggiRiga() {
-		// TODO Auto-generated method stub
-		return null;
+		String riga = null;
+		riga = this.righeLette.get(indiceRigheLette);
+		this.indiceRigheLette++;
+		return riga;
 	}
 
+	@Override
+	public void mostraMessaggio(String msg) {
+		this.messaggiProdotti.add(msg);
+		this.indiceMessaggiProdotti++;
+	}
+
+	//	public String[] getRigheMostrate() {
+	//		return righeMostrate;
+	//	}
+
+	public String nextMessaggio() {
+		String next = this.messaggiProdotti.get(indiceMessaggiMostrati);
+		this.indiceMessaggiMostrati++;
+		return next;
+	}
+
+	public boolean hasNextMessaggio() {
+		return this.indiceMessaggiMostrati < this.indiceMessaggiProdotti;
+	}
 }
