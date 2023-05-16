@@ -1,8 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -10,7 +8,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class LabirintoBuilder{
 	private Labirinto labirinto;
 	private Map<String,Stanza> stanzeLabirinto;
-	
+	private Stanza ultimaStanzaAggiunta;
+
 	public LabirintoBuilder() {
 		this.labirinto = new Labirinto();
 		this.stanzeLabirinto = new HashMap<>();
@@ -20,6 +19,7 @@ public class LabirintoBuilder{
 		Stanza s = new Stanza(nomeStanzaIniziale);
 		stanzeLabirinto.put(nomeStanzaIniziale, s);
 		labirinto.stanzaIniziale = s;
+		ultimaStanzaAggiunta = s;
 		return this;
 	}
 
@@ -27,41 +27,58 @@ public class LabirintoBuilder{
 		Stanza s = new Stanza(nomeStanzaVincente);
 		stanzeLabirinto.put(nomeStanzaVincente, s);
 		labirinto.stanzaVincente = s;
+		ultimaStanzaAggiunta = s;
 		return this;
 	}
-	
+
 	public LabirintoBuilder addAttrezzo(String nomeAttrezzo,int peso) {
 		Attrezzo nuovoAttrezzo = new Attrezzo(nomeAttrezzo,peso);
-		if(labirinto.stanzaIniziale!=null)
-			labirinto.stanzaIniziale.addAttrezzo(nuovoAttrezzo);
-		if(labirinto.stanzaVincente!=null)
-			labirinto.stanzaVincente.addAttrezzo(nuovoAttrezzo);
+		ultimaStanzaAggiunta.addAttrezzo(nuovoAttrezzo);
 		return this;
 	}
-	
+
 	public Labirinto getLabirinto() {
 		return this.labirinto;
 	}
+	
 	public LabirintoBuilder addAdiacenza(String nomeStanza1, String nomeStanza2, String direzione) {
 		if(this.stanzeLabirinto.containsKey(nomeStanza1) && this.stanzeLabirinto.containsKey(nomeStanza2))
-			this.stanzeLabirinto.get(nomeStanza1).impostaStanzaAdiacente(direzione,this.stanzeLabirinto.get(nomeStanza2));
+			if(this.stanzeLabirinto.get(nomeStanza1).getDirezioni().size()<=3)
+				this.stanzeLabirinto.get(nomeStanza1).impostaStanzaAdiacente(direzione,this.stanzeLabirinto.get(nomeStanza2));
 		return this;
 	}
 
-	public LabirintoBuilder addStanza(String stanza) {
-		this.stanzeLabirinto.put(stanza, new Stanza("stanza"));
+	public LabirintoBuilder addStanza(String nomeStanza) {
+		Stanza s = new Stanza(nomeStanza);
+		this.stanzeLabirinto.put(nomeStanza,s );
+		ultimaStanzaAggiunta=s;
 		return this;
 	}
 
-	public List<Stanza> getListaStanze() {
-		List<Stanza> listaStanze = new ArrayList<>(this.stanzeLabirinto.values());
-		return listaStanze;
+	public Map<String, Stanza> getListaStanze() {
+		return this.stanzeLabirinto;
 	}
 
-//	public Stanza addStanzaMagica(String nomeStanzaMagica, int sogliaMagica) {
-//		return stanzaIniziale;
-//		// TODO Auto-generated method stub
-//		
+	public LabirintoBuilder addStanzaMagica(String nomeStanzaMagica, int sogliaMagica) {
+		StanzaMagica s = new StanzaMagica(nomeStanzaMagica,sogliaMagica);
+		this.stanzeLabirinto.put(nomeStanzaMagica,s);
+		ultimaStanzaAggiunta=s;
+		return this;
 	}
+
+	public LabirintoBuilder addStanzaBloccata(String nomeStanzaBloccata, String direzione, String chiave) {
+		StanzaBloccata s = new StanzaBloccata(nomeStanzaBloccata, direzione, chiave);
+		this.stanzeLabirinto.put(nomeStanzaBloccata,s);
+		ultimaStanzaAggiunta = s;
+		return this;
+	}
+
+	public LabirintoBuilder addStanzaBuia(String nomeStanzaBuia, String attrezzoLuce) {
+		StanzaBuia s = new StanzaBuia(nomeStanzaBuia,attrezzoLuce);
+		this.stanzeLabirinto.put(nomeStanzaBuia,s );
+		ultimaStanzaAggiunta=s;
+		return this;
+	}
+}
 
 

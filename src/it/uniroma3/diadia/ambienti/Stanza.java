@@ -74,6 +74,10 @@ public class Stanza {
 	public List<Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
+	
+	public Map<String,Stanza> getMapStanzeAdiacenti() {
+		return this.stanzeAdiacenti;
+	}
 
 	/**
 	 * Mette un attrezzo nella stanza.

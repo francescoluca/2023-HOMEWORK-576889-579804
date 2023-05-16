@@ -33,12 +33,10 @@ public class StanzaMagica extends Stanza{
 		if(contatoreAttrezziPosati >= sogliaMagica) {
 			this.modificaAttrezzo(attrezzo);
 		}
-		super.addAttrezzo(attrezzo);
-		return false;
+		return super.addAttrezzo(attrezzo);
 	}
 
 	public boolean isMagica() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }
